@@ -5,8 +5,8 @@
 const int HX711_dout = 12; //mcu > HX711 dout pin
 const int HX711_sck = 13; //mcu > HX711 sck pin
 
-const char *ssid = "LUN 2";
-const char *password = "thitkhotrungcut";
+const char *ssid = "F101";
+const char *password = "toilatoi88";
 
 const char index_html[] PROGMEM = R"=====(
   <!DOCTYPE html>
@@ -90,7 +90,7 @@ void setup() {
 }
 
 float prev = 0.00;
-int samplingSize = 40;
+int samplingSize = 2;
 int currentSample = 0;
 void loop()
 {
@@ -102,7 +102,7 @@ void loop()
       float i = LoadCell.getData();
       Serial.print("Load_cell output val: ");
       Serial.println(i / 1000);
-      if (abs(i - prev) > 10 && currentSample >= samplingSize) {
+      if (abs(i - prev) > 5 && currentSample >= samplingSize) {
         sendSensorData(i / 1000);
         prev = i;
         currentSample = 0;
